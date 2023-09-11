@@ -7,20 +7,27 @@ const currentScoreEl2 = document.getElementById('current--1');
 const diceEl = document.querySelector('.dice');
 const rollButton = document.querySelector('.btn.btn--roll');
 const holdButton = document.querySelector('.btn.btn--hold');
+const newGameButton = document.querySelector('.btn.btn--new');
 const section0 = document.querySelector('.player--0');
 const section1 = document.querySelector('.player--1');
 
-let currentScore1 = 0;
-let currentScore2 = 0;
-let score1 = 0;
-let score2 = 0;
-let diceValue = 0;
-let firstplayer = true;
+let currentScore1;
+let currentScore2;
+let score1;
+let score2;
+let diceValue;
+let firstplayer;
 
 //starter
 newGame();
 
 function newGame(params) {
+  currentScore2 = 0;
+  currentScore1 = 0;
+  score1 = 0;
+  score2 = 0;
+  diceValue = 0;
+  firstplayer = true;
   playerScoreEl1.textContent = 0;
   playerScoreEl2.textContent = 0;
   diceEl.classList.add('hidden');
@@ -89,3 +96,4 @@ function hold(params) {
 }
 rollButton.addEventListener('click', rollDice);
 holdButton.addEventListener('click', hold);
+newGameButton.addEventListener('click', newGame);
