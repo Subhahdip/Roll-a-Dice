@@ -24,12 +24,14 @@ newGame();
 function newGame(params) {
   currentScore2 = 0;
   currentScore1 = 0;
-  score1 = 0;
+  score1 = 90;
   score2 = 0;
   diceValue = 0;
   firstplayer = true;
-  playerScoreEl1.textContent = 0;
-  playerScoreEl2.textContent = 0;
+  playerScoreEl1.textContent = score1;
+  playerScoreEl2.textContent = score2;
+  currentScoreEl1.textContent = currentScore1;
+  currentScoreEl2.textContent = currentScore2;
   diceEl.classList.add('hidden');
   section1.classList.remove('player--active');
   section0.classList.add('player--active');
@@ -76,21 +78,40 @@ function hold(params) {
   if (firstplayer) {
     score1 += currentScore1;
     playerScoreEl1.textContent = score1;
-    section0.classList.remove('player--active');
-    section1.classList.add('player--active');
-    currentScore1 = 0;
-    currentScore2 = 0;
-    currentScoreEl1.textContent = currentScore1;
-    currentScoreEl2.textContent = currentScore2;
+
+    if (score1 >= 100) {
+      section0.classList.add('player--winner');
+      playerScoreEl1.textContent = `WINNER🎉🎊🎉`;
+      newGameButton.style.backgroundColor = 'green';
+      rollButton.disabled = true;
+      holdButton.disabled = true;
+      diceEl.classList.add('hidden');
+    } else {
+      section0.classList.remove('player--active');
+      section1.classList.add('player--active');
+      currentScore1 = 0;
+      currentScore2 = 0;
+      currentScoreEl1.textContent = currentScore1;
+      currentScoreEl2.textContent = currentScore2;
+    }
   } else {
     score2 += currentScore2;
-    playerScoreEl2.textContent = score2;
-    section1.classList.remove('player--active');
-    section0.classList.add('player--active');
-    currentScore1 = 0;
-    currentScore2 = 0;
-    currentScoreEl1.textContent = currentScore1;
-    currentScoreEl2.textContent = currentScore2;
+    if (score2 >= 100) {
+      section1.classList.add('player--winner');
+      playerScoreEl2.textContent = `WINNER🎉🎊🎉`;
+      newGameButton.style.backgroundColor = 'green';
+      rollButton.disabled = true;
+      holdButton.disabled = true;
+      diceEl.classList.add('hidden');
+    } else {
+      playerScoreEl2.textContent = score2;
+      section1.classList.remove('player--active');
+      section0.classList.add('player--active');
+      currentScore1 = 0;
+      currentScore2 = 0;
+      currentScoreEl1.textContent = currentScore1;
+      currentScoreEl2.textContent = currentScore2;
+    }
   }
   firstplayer = !firstplayer;
 }
